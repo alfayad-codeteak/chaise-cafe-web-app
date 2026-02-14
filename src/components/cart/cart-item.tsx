@@ -37,7 +37,7 @@ export function CartItem({ item }: CartItemProps) {
                                 variant="ghost"
                                 size="icon"
                                 className="h-6 w-6 rounded-md hover:bg-background shadow-sm"
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                onClick={() => updateQuantity(item.id || "", item.quantity - 1)}
                             >
                                 <Minus className="h-3 w-3" />
                             </Button>
@@ -46,7 +46,7 @@ export function CartItem({ item }: CartItemProps) {
                                 variant="ghost"
                                 size="icon"
                                 className="h-6 w-6 rounded-md hover:bg-background shadow-sm"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => updateQuantity(item.id || "", item.quantity + 1)}
                             >
                                 <Plus className="h-3 w-3" />
                             </Button>
@@ -55,7 +55,7 @@ export function CartItem({ item }: CartItemProps) {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-                            onClick={() => removeItem(item.id)}
+                            onClick={() => removeItem(item.id || "")}
                         >
                             <Trash2 className="h-4 w-4" />
                         </Button>
