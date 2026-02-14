@@ -31,7 +31,7 @@ export const useCartStore = create<CartStore>()(
                 }
             },
             removeItem: (id) => {
-                set({ items: get().items.filter((i) => i.id !== id) });
+                set({ items: get().items.filter((i) => (i.id ?? "") !== id) });
             },
             updateQuantity: (id, quantity) => {
                 if (quantity <= 0) {
@@ -40,7 +40,7 @@ export const useCartStore = create<CartStore>()(
                 }
                 set({
                     items: get().items.map((i) =>
-                        i.id === id ? { ...i, quantity } : i
+                        (i.id ?? "") === id ? { ...i, quantity } : i
                     ),
                 });
             },

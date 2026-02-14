@@ -3,8 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ShoppingCart, Menu as MenuIcon, Home, Coffee, Star, Sun, Moon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { ShoppingCart, Menu as MenuIcon, Home, Coffee, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Sheet,
@@ -16,7 +15,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cartStore";
 import { CartContent } from "@/components/cart/cart-content";
-import { ThemeToggle } from "@/components/theme-toggle"; // We'll need to create this
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -27,7 +25,6 @@ import {
 
 export function Header() {
     const totalItems = useCartStore((state) => state.getTotalItems());
-    const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -88,16 +85,6 @@ export function Header() {
                             </nav>
 
                             <div className="mt-auto px-2 pb-4 flex flex-col gap-4 items-center">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                    className="gap-2"
-                                >
-                                    <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                                    <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                                    <span>Toggle Theme</span>
-                                </Button>
                                 <p className="text-sm text-muted-foreground text-center">
                                     © 2024 Chaise
                                 </p>
@@ -143,10 +130,6 @@ export function Header() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className="hidden md:block">
-                        <ThemeToggle />
-                    </div>
-
                     <div className="hidden md:block">
                         <Sheet>
                             <SheetTrigger asChild>
