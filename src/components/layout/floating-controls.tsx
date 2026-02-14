@@ -19,34 +19,31 @@ export function FloatingControls() {
     if (!mounted) return null;
 
     return (
-        <>
-            {/* Bottom Right: Cart Button */}
-            <div className="fixed bottom-6 right-6 z-50">
-                <CartWrapper>
-                    <Button
-                        variant="default"
-                        size="icon"
-                        className="h-14 w-14 rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 group relative"
-                        aria-label="Open cart"
-                    >
-                        <ShoppingCart className="h-6 w-6 transition-transform group-hover:rotate-12" />
-                        <AnimatePresence>
-                            {totalItems > 0 && (
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    exit={{ scale: 0 }}
-                                    className="absolute -top-2 -right-2"
-                                >
-                                    <Badge className="h-6 w-6 flex items-center justify-center p-0 rounded-full bg-destructive text-destructive-foreground border-2 border-background font-bold shadow-sm">
-                                        {totalItems}
-                                    </Badge>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </Button>
-                </CartWrapper>
-            </div>
-        </>
+        <AnimatePresence>
+            {totalItems > 0 && (
+                <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    className="fixed bottom-6 right-6 z-50"
+                >
+                    <CartWrapper>
+                        <Button
+                            variant="default"
+                            size="icon"
+                            className="h-14 w-14 rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 group relative"
+                            aria-label="Open cart"
+                        >
+                            <ShoppingCart className="h-6 w-6 transition-transform group-hover:rotate-12" />
+                            <div className="absolute -top-2 -right-2">
+                                <Badge className="h-6 w-6 flex items-center justify-center p-0 rounded-full bg-destructive text-destructive-foreground border-2 border-background font-bold shadow-sm">
+                                    {totalItems}
+                                </Badge>
+                            </div>
+                        </Button>
+                    </CartWrapper>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
