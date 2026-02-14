@@ -11,16 +11,9 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useQuery } from "@tanstack/react-query";
-import { MenuItem } from "@/lib/types";
+import { fetchMenu } from "@/lib/api";
 import { FoodCard } from "@/components/menu/food-card";
 import { Skeleton } from "@/components/ui/skeleton";
-
-async function fetchMenu() {
-    const response = await import('@/data/menu.json');
-    // Artificial delay for realism
-    await new Promise(resolve => setTimeout(resolve, 800));
-    return response.default as MenuItem[];
-}
 
 export function FeaturedCarousel() {
     const { data: menuItems, isLoading } = useQuery({
