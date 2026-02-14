@@ -36,7 +36,7 @@ export function MenuCategories() {
 
     return (
         <Tabs defaultValue="All" className="w-full" onValueChange={setActiveCategory}>
-            <div className="w-full overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="w-full overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
                 <TabsList className="w-max h-auto flex flex-nowrap justify-start gap-2 bg-transparent p-0">
                     {categories.map((category) => (
                         <TabsTrigger

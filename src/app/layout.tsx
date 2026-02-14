@@ -12,8 +12,33 @@ const excalifont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Brew & Bite",
-  description: "Order your favorite coffee and meals",
+  title: "Chaise : Cafeteria & Restaurant",
+  description: "Experience the finest coffee and culinary delights at Chaise : Cafeteria & Restaurant. A perfect blend of taste and ambiance.",
+  openGraph: {
+    title: "Chaise : Cafeteria & Restaurant",
+    description: "Experience the finest coffee and culinary delights at Chaise. A perfect blend of taste and ambiance.",
+    siteName: "Chaise : Cafeteria & Restaurant",
+    images: [
+      {
+        url: "/chaise-logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Chaise : Cafeteria & Restaurant Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chaise : Cafeteria & Restaurant",
+    description: "Experience the finest coffee and culinary delights at Chaise.",
+    images: ["/chaise-logo.jpg"],
+  },
+  icons: {
+    icon: "/chaise-logo.jpg",
+    apple: "/chaise-logo.jpg",
+  },
 };
 
 import { FloatingControls } from "@/components/layout/floating-controls";
