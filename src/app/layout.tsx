@@ -53,6 +53,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={excalifont.className}>
+        <div
+          className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat pointer-events-none opacity-100"
+          style={{ backgroundImage: "var(--bg-image)" }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -60,7 +64,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            {children}
+            <div className="relative flex min-h-screen flex-col w-full">
+              {children}
+            </div>
             <FloatingControls />
             <Toaster />
             <SplashScreen />

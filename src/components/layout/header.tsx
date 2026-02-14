@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ShoppingCart, Menu as MenuIcon, Home, Coffee, Star } from "lucide-react";
+import { ShoppingCart, Menu as MenuIcon, Home, Coffee, Star, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Sheet,
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cartStore";
-import { CartContent } from "@/components/cart/cart-content";
+import { CartWrapper } from "@/components/cart/cart-wrapper";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -82,6 +82,13 @@ export function Header() {
                                     <Star className="h-5 w-5" />
                                     Features
                                 </Link>
+                                <Link
+                                    href="/orders"
+                                    className="flex items-center gap-3 text-lg font-medium py-2 px-4 rounded-lg hover:bg-muted transition-colors"
+                                >
+                                    <History className="h-5 w-5" />
+                                    My Orders
+                                </Link>
                             </nav>
 
                             <div className="mt-auto px-2 pb-4 flex flex-col gap-4 items-center">
@@ -110,6 +117,13 @@ export function Header() {
                                         </Link>
                                     </NavigationMenuLink>
                                 </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                        <Link href="/orders">
+                                            My Orders
+                                        </Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuItem>
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>
@@ -131,23 +145,18 @@ export function Header() {
 
                 <div className="flex items-center gap-4">
                     <div className="hidden md:block">
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant={mounted && totalItems > 0 ? "default" : "outline"} size="icon" className="relative h-10 w-10">
-                                    <ShoppingCart className="h-5 w-5" />
-                                    {mounted && totalItems > 0 && (
-                                        <Badge
-                                            className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground"
-                                        >
-                                            {totalItems}
-                                        </Badge>
-                                    )}
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent className="w-full sm:max-w-md p-0 h-full flex flex-col gap-0">
-                                <CartContent />
-                            </SheetContent>
-                        </Sheet>
+                        <CartWrapper>
+                            <Button variant={mounted && totalItems > 0 ? "default" : "outline"} size="icon" className="relative h-10 w-10">
+                                <ShoppingCart className="h-5 w-5" />
+                                {mounted && totalItems > 0 && (
+                                    <Badge
+                                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-primary text-primary-foreground"
+                                    >
+                                        {totalItems}
+                                    </Badge>
+                                )}
+                            </Button>
+                        </CartWrapper>
                     </div>
                 </div>
             </div>

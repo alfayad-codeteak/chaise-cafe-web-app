@@ -52,7 +52,7 @@ export function Hero() {
                     loop
                     muted
                     playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 />
             </AnimatePresence>
             <div className="absolute inset-0 bg-black/30" />

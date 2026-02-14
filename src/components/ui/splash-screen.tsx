@@ -21,7 +21,7 @@ export function SplashScreen() {
             {isVisible && (
                 <motion.div
                     key="splash-screen"
-                    className="fixed inset-0 z-[100] flex items-center justify-center"
+                    className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none"
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -32,7 +32,7 @@ export function SplashScreen() {
                             initial: { x: 0 },
                             exit: { x: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }
                         }}
-                        className="absolute left-0 top-0 bottom-0 w-1/2 bg-black z-20"
+                        className="absolute left-0 top-0 bottom-0 w-1/2 bg-black z-20 pointer-events-auto"
                     />
 
                     {/* Right Door Panel */}
@@ -41,7 +41,7 @@ export function SplashScreen() {
                             initial: { x: 0 },
                             exit: { x: "100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }
                         }}
-                        className="absolute right-0 top-0 bottom-0 w-1/2 bg-black z-20"
+                        className="absolute right-0 top-0 bottom-0 w-1/2 bg-black z-20 pointer-events-auto"
                     />
 
                     {/* Logo Container */}
