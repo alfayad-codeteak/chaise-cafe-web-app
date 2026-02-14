@@ -8,14 +8,11 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, ArrowLeft } from "lucide-react";
 import { SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { CheckoutDrawer } from "./checkout-drawer";
 import { CheckoutForm } from "./checkout-form";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function CartContent() {
     const { items, getTotalPrice } = useCartStore();
     const total = getTotalPrice();
-    const isDesktop = useMediaQuery("(min-width: 768px)");
     const [view, setView] = useState<"cart" | "checkout">("cart");
 
     if (items.length === 0) {
@@ -40,7 +37,7 @@ export function CartContent() {
         );
     }
 
-    if (view === "checkout" && isDesktop) {
+    if (view === "checkout") {
         return (
             <div className="flex h-full flex-col overflow-hidden relative bg-background">
                 <SheetHeader className="px-6 pt-6 pb-2 shrink-0 flex flex-row items-center gap-2 space-y-0">
@@ -85,24 +82,13 @@ export function CartContent() {
                     </div>
                 </div>
 
-                {isDesktop ? (
-                    <Button
-                        className="w-full text-lg h-12 rounded-full font-semibold shadow-lg shadow-primary/20"
-                        size="lg"
-                        onClick={() => setView("checkout")}
-                    >
-                        Proceed to Checkout
-                    </Button>
-                ) : (
-                    <CheckoutDrawer>
-                        <Button
-                            className="w-full text-lg h-12 rounded-full font-semibold shadow-lg shadow-primary/20"
-                            size="lg"
-                        >
-                            Proceed to Checkout
-                        </Button>
-                    </CheckoutDrawer>
-                )}
+                <Button
+                    className="w-full text-lg h-12 rounded-full font-semibold shadow-lg shadow-primary/20"
+                    size="lg"
+                    onClick={() => setView("checkout")}
+                >
+                    Proceed to Checkout
+                </Button>
             </div>
         </div>
     );
