@@ -125,9 +125,30 @@ export default function OrdersPage() {
                                     <h3 className="font-semibold flex items-center gap-2 text-sm text-muted-foreground uppercase tracking-wider">
                                         <MapPin className="h-4 w-4" /> Delivery Details
                                     </h3>
-                                    <div className="bg-secondary/10 p-4 rounded-lg text-sm space-y-2">
-                                        <p className="font-medium">Delivery Address:</p>
-                                        <p className="text-muted-foreground leading-relaxed">{order.address}</p>
+                                    <div className="bg-secondary/10 p-4 rounded-lg text-sm space-y-4">
+                                        {(order.customerName || order.phoneNumber) && (
+                                            <>
+                                                <div className="grid gap-1">
+                                                    <p className="font-medium">Contact:</p>
+                                                    {order.customerName && <p className="text-muted-foreground font-medium">{order.customerName}</p>}
+                                                    {order.phoneNumber && <p className="text-muted-foreground">{order.phoneNumber}</p>}
+                                                </div>
+                                                <Separator className="bg-border/50" />
+                                            </>
+                                        )}
+                                        <div className="grid gap-1">
+                                            <p className="font-medium">Address:</p>
+                                            <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">{order.address}</p>
+                                        </div>
+                                        {order.instructions && (
+                                            <>
+                                                <Separator className="bg-border/50" />
+                                                <div className="grid gap-1">
+                                                    <p className="font-medium">Instructions:</p>
+                                                    <p className="text-muted-foreground italic">"{order.instructions}"</p>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                     <div className="flex items-center gap-2 text-sm text-muted-foreground bg-blue-500/10 p-3 rounded-lg text-blue-600 dark:text-blue-400">
                                         <Clock className="h-4 w-4" />

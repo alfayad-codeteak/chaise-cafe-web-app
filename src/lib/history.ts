@@ -10,6 +10,9 @@ export interface Order {
     items: OrderItem[];
     total: number;
     address: string;
+    customerName: string;
+    phoneNumber: string;
+    instructions?: string;
     status: "Pending" | "Completed" | "Cancelled";
 }
 
