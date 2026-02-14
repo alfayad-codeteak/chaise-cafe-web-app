@@ -1,17 +1,22 @@
 "use client";
 
+import { useState } from "react";
 import { useCartStore } from "@/store/cartStore";
 import { CartItem } from "./cart-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, ArrowLeft } from "lucide-react";
 import { SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { CheckoutDrawer } from "./checkout-drawer";
+import { CheckoutForm } from "./checkout-form";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function CartContent() {
     const { items, getTotalPrice } = useCartStore();
     const total = getTotalPrice();
+    const isDesktop = useMediaQuery("(min-width: 768px)");
+    const [view, setView] = useState<"cart" | "checkout">("cart");
 
     if (items.length === 0) {
         return (
@@ -30,6 +35,22 @@ export function CartContent() {
                     <p className="text-sm text-muted-foreground max-w-xs mx-auto">
                         Looks like you haven't added anything to your cart yet.
                     </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (view === "checkout" && isDesktop) {
+        return (
+            <div className="flex h-full flex-col overflow-hidden relative bg-background">
+                <SheetHeader className="px-6 pt-6 pb-2 shrink-0 flex flex-row items-center gap-2 space-y-0">
+                    <Button variant="ghost" size="icon" onClick={() => setView("cart")} className="-ml-2 h-8 w-8">
+                        <ArrowLeft className="h-5 w-5" />
+                    </Button>
+                    <SheetTitle>Checkout</SheetTitle>
+                </SheetHeader>
+                <div className="flex-1 overflow-hidden px-6 pb-6">
+                    <CheckoutForm onSuccess={() => setView("cart")} />
                 </div>
             </div>
         );
@@ -64,14 +85,24 @@ export function CartContent() {
                     </div>
                 </div>
 
-                <CheckoutDrawer>
+                {isDesktop ? (
                     <Button
                         className="w-full text-lg h-12 rounded-full font-semibold shadow-lg shadow-primary/20"
                         size="lg"
+                        onClick={() => setView("checkout")}
                     >
                         Proceed to Checkout
                     </Button>
-                </CheckoutDrawer>
+                ) : (
+                    <CheckoutDrawer>
+                        <Button
+                            className="w-full text-lg h-12 rounded-full font-semibold shadow-lg shadow-primary/20"
+                            size="lg"
+                        >
+                            Proceed to Checkout
+                        </Button>
+                    </CheckoutDrawer>
+                )}
             </div>
         </div>
     );
